@@ -1,0 +1,12 @@
+.versus-container{
+   position: absolute;
+   top: 50%; 
+   width: 150px;
+   height: 150px;
+   text-align: center;
+   background-color: #fff;
+   color: black;
+   font-size: 100px;
+   font-weight: 400;
+   border-radius: 50%;
+}
