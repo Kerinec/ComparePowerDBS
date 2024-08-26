@@ -1,0 +1,18 @@
+.actions-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 15px;
+}
+.actions-card-more,.actions-card-less{
+    background-color: transparent;
+    border: 3px solid #fff;
+    font-size: 22px;
+    color: #EFF7F6;
+    font-weight: 600;
+    transition: 0.5s;
+}
+.actions-card-more:hover,.actions-card-less:hover{
+    
+    transform: scale(1.5);
+}

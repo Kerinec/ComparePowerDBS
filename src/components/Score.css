@@ -1,0 +1,11 @@
+.score-container{
+    width: 100vh;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.score{
+    font-size: 24px;
+    font-weight: 500;
+}
