@@ -46,10 +46,14 @@ function App() {
     };
 
     const generateCharacter = () => {
-        console.log("characterData",characterData);
+        let num1 = numRandom();
+        let num2 = numRandom();
+        while(num1 === num2){
+            num1 = numRandom();
+        }
         setCharacter({
-            characterLeft: characterData[numRandom()],
-            characterRight: characterData[numRandom()],
+            characterLeft: characterData[num1],
+            characterRight: characterData[num2],
         });
     };
     
