@@ -8,15 +8,14 @@ function App() {
     const [characterData, setCharacterData] = useState({});
     const [character, setCharacter] = useState(undefined);
     const [saveNumber, setSaveNumber] = useState([]);
-    const [versusState, setVersusState] = useState("VS")
+    const [versusState, setVersusState] = useState("VS");
 
     useEffect(() => {
-        console.log("useEff fetch", characterData)
+        console.log("useEff fetch", characterData);
         fetchAllCharacter();
     }, []);
     useEffect(() => {
-        
-        console.log("useEff generate", characterData)
+        console.log("useEff generate", characterData);
         if (character === undefined && Object.keys(characterData).length > 0) {
             generateCharacter();
         }
@@ -27,10 +26,18 @@ function App() {
             "https://dragonball-api.com/api/characters?limit=100"
         );
         let data = await response.json();
-         let filterData = data.items.filter((element)=> element.ki !== "unknown")
+        let filterData = data.items.filter(
+            (element) => element.ki !== "unknown"
+        );
         setCharacterData(filterData);
     };
-
+    const generateNextRound = () => {
+        let nextRoundCharacter = {
+            characterLeft: character.characterRight,
+            characterRight: characterData[numRandom()],
+        };
+        setCharacter(nextRoundCharacter)
+    };
     const numRandom = () => {
         let number = Math.round(Math.random() * characterData.length);
         if (number === characterData.length) {
@@ -49,7 +56,7 @@ function App() {
     const generateCharacter = () => {
         let num1 = numRandom();
         let num2 = numRandom();
-        while(num1 === num2){
+        while (num1 === num2) {
             num1 = numRandom();
         }
         setCharacter({
@@ -57,7 +64,7 @@ function App() {
             characterRight: characterData[num2],
         });
     };
-    
+
     return (
         <div className="app">
             {character === undefined ? undefined : (
@@ -68,11 +75,12 @@ function App() {
                         numPower={character.characterLeft.maxKi}
                         img={character.characterLeft.image}
                     />
-                    <Versus state={versusState}/>
+                    <Versus state={versusState} />
                     <CharacterCard
-                        state ={setVersusState}
+                        nextRound={generateNextRound}
+                        state={setVersusState}
                         interaction={true}
-                        powerRival ={character.characterLeft.maxKi}
+                        powerRival={character.characterLeft.maxKi}
                         name={character.characterRight.name}
                         numPower={character.characterRight.maxKi}
                         img={character.characterRight.image}

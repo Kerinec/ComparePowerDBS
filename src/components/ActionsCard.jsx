@@ -1,7 +1,7 @@
 import "./ActionsCard.css";
 import Versus from "./Versus";
 
-const ActionsCard = ({ numPower, powerRival, state }) => {
+const ActionsCard = ({ numPower, powerRival, state, nextRound }) => {
     const typePower = {
         Billion: 1,
         Trillion: 2,
@@ -25,6 +25,7 @@ const ActionsCard = ({ numPower, powerRival, state }) => {
                 state("win");
             }
         }
+        nextRound();
     };
     const verificationNumStr = () => {
         let rightPowerValue = parseFloat(numPower);
@@ -32,8 +33,8 @@ const ActionsCard = ({ numPower, powerRival, state }) => {
         let rightPower = getTypePower(numPower);
         let leftPower = getTypePower(powerRival);
         if (rightPower === 0 && leftPower === 0) {
-            let characterRightPower = numPower.replace(/[.,]/g, '');
-            let characterLeftPower = powerRival.replace(/[.,]/g, '');
+            let characterRightPower = numPower.replace(/[.,]/g, "");
+            let characterLeftPower = powerRival.replace(/[.,]/g, "");
             rightPowerValue = parseInt(characterRightPower);
             leftPowerValue = parseInt(characterLeftPower);
         }
@@ -78,8 +79,6 @@ const ActionsCard = ({ numPower, powerRival, state }) => {
         }
         return typePower[str];
     };
-    verificationNumStr();
-    verificationWin();
 
     return (
         <div className="actions-card-container">
