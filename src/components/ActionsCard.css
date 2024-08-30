@@ -4,7 +4,9 @@
     width: 200px;
     gap: 15px;
 }
-.actions-card-more,.actions-card-less{
+.actions-card{
+    display: flex;
+    justify-content: space-evenly;
     background-color: transparent;
     border: 3px solid #fff;
     font-size: 22px;
@@ -12,7 +14,7 @@
     font-weight: 600;
     transition: 0.5s;
 }
-.actions-card-more:hover,.actions-card-less:hover{
+.actions-card:hover{
     
     transform: scale(1.5);
 }

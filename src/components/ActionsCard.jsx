@@ -1,5 +1,6 @@
 import "./ActionsCard.css";
 import Versus from "./Versus";
+import { FaAngleDoubleUp, FaAngleDoubleDown} from "react-icons/fa";
 
 const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
     const typePower = {
@@ -117,17 +118,19 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
                 onClick={() => {
                     verificationWin("higther");
                 }}
-                className="actions-card-more"
-            >
-                Higher
+                className="actions-card"
+            >   
+                Higher 
+                <FaAngleDoubleUp color="green"/>
             </button>
             <button
                 onClick={() => {
                     verificationWin("lower");
                 }}
-                className="actions-card-less"
+                className="actions-card"
             >
                 Lower
+                <FaAngleDoubleDown color="red"/>
             </button>
         </div>
     );

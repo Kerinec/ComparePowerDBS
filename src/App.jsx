@@ -76,7 +76,7 @@ function App() {
                         numPower={character.characterLeft.maxKi}
                         img={character.characterLeft.image}
                     />
-                    <Versus state={versusState} />
+                    <Versus state={versusState} setVersusState={setVersusState}/>
                     <CharacterCard
                         setScore={setScore}
                         nextRound={generateNextRound}
