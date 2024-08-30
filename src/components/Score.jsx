@@ -3,10 +3,10 @@ import "./Score.css"
 
 
 
-const Score = () =>{
+const Score = ({score}) =>{
     return(<div className="score-container">
-        <div className="score">High score : 10</div>
-        <div className="score">Score : 0</div>
+        <div className="score">High score : {score.highScore}</div>
+        <div className="score">Score : {score.score}</div>
     </div>)
 }
 

@@ -9,6 +9,7 @@ function App() {
     const [character, setCharacter] = useState(undefined);
     const [saveNumber, setSaveNumber] = useState([]);
     const [versusState, setVersusState] = useState("VS");
+    const [score, setScore] = useState({ score: 0, highScore: 0 });
 
     useEffect(() => {
         console.log("useEff fetch", characterData);
@@ -36,7 +37,7 @@ function App() {
             characterLeft: character.characterRight,
             characterRight: characterData[numRandom()],
         };
-        setCharacter(nextRoundCharacter)
+        setCharacter(nextRoundCharacter);
     };
     const numRandom = () => {
         let number = Math.round(Math.random() * characterData.length);
@@ -64,7 +65,7 @@ function App() {
             characterRight: characterData[num2],
         });
     };
-
+    console.log("puntos", score);
     return (
         <div className="app">
             {character === undefined ? undefined : (
@@ -77,6 +78,7 @@ function App() {
                     />
                     <Versus state={versusState} />
                     <CharacterCard
+                        setScore={setScore}
                         nextRound={generateNextRound}
                         state={setVersusState}
                         interaction={true}
@@ -85,7 +87,7 @@ function App() {
                         numPower={character.characterRight.maxKi}
                         img={character.characterRight.image}
                     />
-                    <Score />
+                    <Score score={score} />
                 </>
             )}
         </div>

@@ -1,7 +1,7 @@
 import "./ActionsCard.css";
 import Versus from "./Versus";
 
-const ActionsCard = ({ numPower, powerRival, state, nextRound }) => {
+const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
     const typePower = {
         Billion: 1,
         Trillion: 2,
@@ -14,15 +14,46 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound }) => {
         if (selection === "higther") {
             if (verificationNumStr() === "numPower") {
                 state("win");
+
+                setScore((point) => {
+                    return {
+                        ...point,
+                        score: point.score + 1,
+                    };
+                });
             } else {
                 state("loose");
+                setScore((point) => {
+                    return {
+                        highScore:
+                            point.highScore < point.score
+                                ? point.score
+                                : point.highScore,
+                        score: 0,
+                    };
+                });
             }
         }
         if (selection === "lower") {
             if (verificationNumStr() === "numPower") {
                 state("loose");
+                setScore((point) => {
+                    return {
+                        highScore:
+                            point.highScore < point.score
+                                ? point.score
+                                : point.highScore,
+                        score: 0,
+                    };
+                });
             } else {
                 state("win");
+                setScore((point) => {
+                    return {
+                        ...point,
+                        score: point.score + 1,
+                    };
+                });
             }
         }
         nextRound();

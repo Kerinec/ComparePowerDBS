@@ -1,5 +1,4 @@
 import "./Versus.css";
-
 const Versus = ({ state }) => {
     let versusClass = "";
     if (state === "win") {
