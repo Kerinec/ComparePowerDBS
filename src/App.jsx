@@ -8,6 +8,7 @@ function App() {
     const [characterData, setCharacterData] = useState({});
     const [character, setCharacter] = useState(undefined);
     const [saveNumber, setSaveNumber] = useState([]);
+    const [versusState, setVersusState] = useState("VS")
 
     useEffect(() => {
         console.log("useEff fetch", characterData)
@@ -67,8 +68,9 @@ function App() {
                         numPower={character.characterLeft.maxKi}
                         img={character.characterLeft.image}
                     />
-                    <Versus />
+                    <Versus state={versusState}/>
                     <CharacterCard
+                        state ={setVersusState}
                         interaction={true}
                         powerRival ={character.characterLeft.maxKi}
                         name={character.characterRight.name}
