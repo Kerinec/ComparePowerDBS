@@ -10,7 +10,8 @@ function App() {
     const [saveNumber, setSaveNumber] = useState([]);
     const [versusState, setVersusState] = useState("VS");
     const [score, setScore] = useState({ score: 0, highScore: 0 });
-
+    const [startGame, setStartGame] = useState(false);
+    
     useEffect(() => {
         console.log("useEff fetch", characterData);
         fetchAllCharacter();
@@ -66,6 +67,24 @@ function App() {
         });
     };
     console.log("puntos", score);
+    const handleStartClick = () => {
+        setStartGame(true);
+    };
+    const handleRegisterClick = () => {
+        alert("Prueba de boton de registro no implementado");
+    };
+
+    if (!startGame) {
+        return (
+            <div className="start-screen">
+                <div className="title-start">Welcome</div>
+                <div className="button-group">
+                    <button onClick={handleStartClick}>Play</button>
+                    <button onClick={handleRegisterClick}>Register</button>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="app">
             {character === undefined ? undefined : (
@@ -76,7 +95,10 @@ function App() {
                         numPower={character.characterLeft.maxKi}
                         img={character.characterLeft.image}
                     />
-                    <Versus state={versusState} setVersusState={setVersusState}/>
+                    <Versus
+                        state={versusState}
+                        setVersusState={setVersusState}
+                    />
                     <CharacterCard
                         setScore={setScore}
                         nextRound={generateNextRound}
