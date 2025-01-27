@@ -1,24 +1,28 @@
 import "./Versus.css";
 import { FaCheckCircle } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-const Versus = ({ state, setVersusState }) => {
+import { Context } from "../App";
+import { useContext } from "react";
+
+const Versus = () => {
+    const { setVersusState, versusState } = useContext(Context);
     let versusClass = "";
     let textVersus = <></>;
-    if (state === "win") {
+    if (versusState === "win") {
         versusClass = "versus-container win";
         textVersus = <FaCheckCircle />;
         setTimeout(() => {
             setVersusState("VS");
         }, 2000);
     }
-    if (state === "loose") {
+    if (versusState === "loose") {
         versusClass = "versus-container loose";
         textVersus = <ImCross />;
         setTimeout(() => {
             setVersusState("VS");
         }, 2000);
     }
-    if (state === "VS") {
+    if (versusState === "VS") {
         versusClass = "versus-container";
         textVersus = "VS";
     }

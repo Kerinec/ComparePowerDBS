@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import CharacterCard from "./components/CharacterCard";
 import Versus from "./components/Versus";
 import Score from "./components/Score";
-
+export const Context = createContext();
 function App() {
     const [characterData, setCharacterData] = useState({});
     const [character, setCharacter] = useState(undefined);
@@ -11,7 +11,6 @@ function App() {
     const [versusState, setVersusState] = useState("VS");
     const [score, setScore] = useState({ score: 0, highScore: 0 });
     const [startGame, setStartGame] = useState(false);
-    
     useEffect(() => {
         console.log("useEff fetch", characterData);
         fetchAllCharacter();
@@ -86,33 +85,32 @@ function App() {
         );
     }
     return (
-        <div className="app">
-            {character === undefined ? undefined : (
-                <>
-                    <CharacterCard
-                        interaction={false}
-                        name={character.characterLeft.name}
-                        numPower={character.characterLeft.maxKi}
-                        img={character.characterLeft.image}
-                    />
-                    <Versus
-                        state={versusState}
-                        setVersusState={setVersusState}
-                    />
-                    <CharacterCard
-                        setScore={setScore}
-                        nextRound={generateNextRound}
-                        state={setVersusState}
-                        interaction={true}
-                        powerRival={character.characterLeft.maxKi}
-                        name={character.characterRight.name}
-                        numPower={character.characterRight.maxKi}
-                        img={character.characterRight.image}
-                    />
-                    <Score score={score} />
-                </>
-            )}
-        </div>
+        <Context.Provider value={{ setVersusState, versusState }}>
+            <div className="app">
+                {character === undefined ? undefined : (
+                    <>
+                        <CharacterCard
+                            interaction={false}
+                            name={character.characterLeft.name}
+                            numPower={character.characterLeft.maxKi}
+                            img={character.characterLeft.image}
+                        />
+                        <Versus
+                        />
+                        <CharacterCard
+                            setScore={setScore}
+                            nextRound={generateNextRound}
+                            interaction={true}
+                            powerRival={character.characterLeft.maxKi}
+                            name={character.characterRight.name}
+                            numPower={character.characterRight.maxKi}
+                            img={character.characterRight.image}
+                        />
+                        <Score score={score} />
+                    </>
+                )}
+            </div>
+        </Context.Provider>
     );
 }
 

@@ -1,8 +1,10 @@
 import "./ActionsCard.css";
 import Versus from "./Versus";
-import { FaAngleDoubleUp, FaAngleDoubleDown} from "react-icons/fa";
-
-const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
+import { FaAngleDoubleUp, FaAngleDoubleDown } from "react-icons/fa";
+import { Context } from "../App";
+import { useContext } from "react";
+const ActionsCard = ({ numPower, powerRival, nextRound, setScore }) => {
+    const { setVersusState } = useContext(Context);
     const typePower = {
         Billion: 1,
         Trillion: 2,
@@ -14,7 +16,7 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
     const verificationWin = (selection) => {
         if (selection === "higther") {
             if (verificationNumStr() === "numPower") {
-                state("win");
+                setVersusState("win");
 
                 setScore((point) => {
                     return {
@@ -23,7 +25,7 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
                     };
                 });
             } else {
-                state("loose");
+                setVersusState("loose");
                 setScore((point) => {
                     return {
                         highScore:
@@ -37,7 +39,7 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
         }
         if (selection === "lower") {
             if (verificationNumStr() === "numPower") {
-                state("loose");
+                setVersusState("loose");
                 setScore((point) => {
                     return {
                         highScore:
@@ -48,7 +50,7 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
                     };
                 });
             } else {
-                state("win");
+                setVersusState("win");
                 setScore((point) => {
                     return {
                         ...point,
@@ -70,8 +72,6 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
             rightPowerValue = parseInt(characterRightPower);
             leftPowerValue = parseInt(characterLeftPower);
         }
-        console.log("derecha", rightPowerValue);
-        console.log("izquierda", leftPowerValue);
         if (rightPower === leftPower) {
             if (rightPowerValue > leftPowerValue) {
                 return "numPower";
@@ -119,9 +119,9 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
                     verificationWin("higther");
                 }}
                 className="actions-card"
-            >   
-                Higher 
-                <FaAngleDoubleUp color="green"/>
+            >
+                Higher
+                <FaAngleDoubleUp color="green" />
             </button>
             <button
                 onClick={() => {
@@ -130,7 +130,7 @@ const ActionsCard = ({ numPower, powerRival, state, nextRound, setScore }) => {
                 className="actions-card"
             >
                 Lower
-                <FaAngleDoubleDown color="red"/>
+                <FaAngleDoubleDown color="red" />
             </button>
         </div>
     );

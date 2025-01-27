@@ -6,7 +6,6 @@ const CharacterCard = ({
     numPower,
     img,
     powerRival,
-    state,
     nextRound,
     setScore,
 }) => {
@@ -19,7 +18,6 @@ const CharacterCard = ({
                 <ActionsCard
                     numPower={numPower}
                     powerRival={powerRival}
-                    state={state}
                     nextRound={nextRound}
                     setScore={setScore}
                 />
